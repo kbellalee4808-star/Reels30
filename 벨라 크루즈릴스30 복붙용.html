@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>크루즈 릴스 30 · Bella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C; --gold:#D4A94A; --ivory:#FAF7F2;
+  --navy-soft:#2C4E72; --ink:#2A2A2A; --line:#E8E0D4;
+  --courage:#C67B5C; --cruise:#3E7CB1;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{
+  font-family:'Noto Sans KR',sans-serif; background:var(--ivory); color:var(--ink);
+  line-height:1.5; word-break:keep-all; padding-bottom:env(safe-area-inset-bottom);
+}
+.wrap{max-width:520px;margin:0 auto;padding:0 16px;}
+
+/* Hero */
+.hero{text-align:center;padding:44px 16px 28px;}
+.hero-eyebrow{
+  font-size:12px;letter-spacing:3px;color:var(--gold);font-weight:700;
+  text-transform:uppercase;margin-bottom:12px;
+}
+.hero-title{font-size:26px;font-weight:900;color:var(--navy);line-height:1.35;}
+.hero-title em{font-style:normal;color:var(--gold);}
+.hero-sub{font-size:14px;color:var(--navy-soft);margin-top:14px;line-height:1.7;}
+.hero-meta{
+  display:inline-flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;
+}
+.chip{
+  background:#fff;border:1px solid var(--line);border-radius:20px;
+  padding:6px 14px;font-size:12px;color:var(--navy);font-weight:500;
+}
+
+/* Notice */
+.notice{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin-bottom:6px;
+}
+.notice-row{
+  display:flex;align-items:center;gap:10px;font-size:12.5px;
+  color:var(--navy);margin-bottom:8px;font-weight:500;
+}
+.notice-badge{
+  font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;
+  border:1px solid;flex:0 0 auto;
+}
+.notice-tip{
+  font-size:11.5px;color:var(--navy-soft);background:var(--ivory);
+  border-radius:8px;padding:8px 10px;margin-top:4px;line-height:1.5;
+}
+
+/* Filter */
+.filters{
+  display:flex;gap:6px;overflow-x:auto;padding:10px 0 14px;
+  position:sticky;top:0;background:var(--ivory);z-index:20;
+  -webkit-overflow-scrolling:touch;
+}
+.filter-btn{
+  flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:22px;
+  border:1.5px solid var(--line);background:#fff;color:var(--navy);
+  font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;
+  display:flex;align-items:center;white-space:nowrap;transition:.2s;
+}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+/* Card */
+.cards{padding-bottom:60px;}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  margin-bottom:12px;overflow:hidden;
+}
+.card-head{
+  width:100%;display:flex;align-items:center;gap:12px;
+  padding:16px 14px;background:none;border:none;cursor:pointer;
+  font-family:inherit;text-align:left;min-height:60px;
+}
+.card-order{
+  flex:0 0 auto;width:52px;display:flex;flex-direction:column;
+  align-items:center;gap:2px;
+}
+.order-slot{
+  font-size:20px;font-weight:900;color:var(--gold);line-height:1;
+}
+.order-date{
+  font-size:10px;font-weight:700;color:var(--navy-soft);white-space:nowrap;
+}
+.card-title-wrap{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0;}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.card-fmt{
+  font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;
+  border-radius:10px;color:#fff;
+}
+.upload-mode{
+  font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:10px;
+  border:1px solid;
+}
+.mode-manual{color:var(--courage);border-color:var(--courage);background:#fff;}
+.mode-auto{color:var(--cruise);border-color:var(--cruise);background:#fff;}
+.fmt-A{background:#7A9E7E;} .fmt-B{background:#C99B6E;}
+.fmt-C{background:#B5735E;} .fmt-D{background:#6E8CAD;}
+.card-title{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.4;}
+.card-chevron{
+  flex:0 0 auto;color:var(--navy-soft);font-size:16px;transition:transform .3s;
+}
+.card.open .card-chevron{transform:rotate(180deg);}
+
+.card-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.card.open .card-body{max-height:1400px;}
+.card-body-inner{padding:0 14px 18px;}
+
+.block{margin-top:16px;}
+.block-label{
+  font-size:12px;font-weight:700;color:var(--navy-soft);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.hook-box{
+  background:var(--navy);border-radius:12px;padding:18px 16px;text-align:center;
+}
+.hook-line{display:block;color:#fff;font-size:16px;font-weight:700;line-height:1.5;}
+.hook-line.hook-em{color:var(--gold);font-size:20px;font-weight:900;}
+.subs{list-style:none;}
+.subs li{
+  background:var(--ivory);border-radius:8px;padding:9px 12px;margin-bottom:6px;
+  font-size:13.5px;color:var(--ink);font-weight:500;
+}
+.kw-tag{
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;color:#fff;
+}
+.kw-courage{background:var(--courage);} .kw-cruise{background:var(--cruise);}
+.caption{
+  font-family:inherit;white-space:pre-wrap;font-size:13px;line-height:1.7;
+  background:var(--ivory);border:1px solid var(--line);border-radius:10px;
+  padding:14px;color:var(--ink);
+}
+.copy-btn{
+  width:100%;margin-top:10px;min-height:48px;border-radius:12px;
+  background:var(--gold);color:#fff;border:none;font-family:inherit;
+  font-size:14px;font-weight:700;cursor:pointer;transition:.2s;
+}
+.copy-btn:active{transform:scale(.98);}
+.copy-btn.done{background:#7A9E7E;}
+
+.footer{text-align:center;padding:30px 16px 50px;color:var(--navy-soft);font-size:12px;}
+.footer .fname{font-weight:900;color:var(--navy);letter-spacing:2px;}
+
+.hidden{display:none;}
+@media(max-width:360px){
+  .hero-title{font-size:22px;} .card-title{font-size:13.5px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-eyebrow">30 Reels · Upload Order</div>
+    <h1 class="hero-title">크루즈 릴스 <em>30</em><br>업로드 순서표</h1>
+    <p class="hero-sub">7/16 ~ 9/9 · 위에서부터 순서대로<br>제목을 탭하면 자막·캡션이 펼쳐져요</p>
+    <div class="hero-meta">
+      <span class="chip">🎬 커버 자막</span>
+      <span class="chip">📝 온스크린</span>
+      <span class="chip">💬 캡션 복사</span>
+    </div>
+  </header>
+
+  <div class="notice">
+    <div class="notice-row">
+      <span class="notice-badge mode-manual">직접 업로드</span>
+      <span>7/16~7/20 · 5개 (한국 저녁 8시에 직접)</span>
+    </div>
+    <div class="notice-row">
+      <span class="notice-badge mode-auto">8PM 예약</span>
+      <span>7/21~ · 이틀에 1개 · KST 저녁 8시 예약</span>
+    </div>
+    <div class="notice-tip">💡 초반 5개가 알고리즘 좌우 — 검증된 강카드부터 배치했어요</div>
+  </div>
+
+  <nav class="filters" id="filters">
+    <button class="filter-btn active" data-filter="all">전체 31</button>
+    <button class="filter-btn" data-filter="week1">🔥 이번주 5</button>
+    <button class="filter-btn" data-filter="A">리스트</button>
+    <button class="filter-btn" data-filter="B">하루</button>
+    <button class="filter-btn" data-filter="C">돈·반전</button>
+    <button class="filter-btn" data-filter="D">이유</button>
+    <button class="filter-btn" data-filter="용기">DM 용기</button>
+    <button class="filter-btn" data-filter="크루즈">DM 크루즈</button>
+  </nav>
+
+  <main class="cards" id="cards">
+    
+  <article class="card" data-fmt="B" data-kw="용기" data-week="1">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">1</span>
+        <span class="order-date">7/16(목)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-manual">직접 업로드</span>
+        </span>
+        <span class="card-title">바다에 누워 하늘만 봤어요 (코즈멜)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">10년 전엔 사무실</span><span class="hook-line hook-em">지금은 카리브해</span><span class="hook-line">코즈멜 🇲🇽</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>빨간 수영복 물에 뜬 장면</li><li>투명한 카리브해 물빛</li><li>me &amp; what I see</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-C">바다 한가운데 떠서
+하늘만 보고 있었어요.
+
+여기가 코즈멜이에요.
+19번째 항해에서 만난
+카리브해의 물빛.
+
+발이 닿지 않는데도
+물이 투명해서
+바닥까지 다 보여요.
+
+10년 전엔
+사무실 형광등 아래 있었는데
+지금은 이 물 위에 누워 있어요.
+
+가끔 실감이 안 나요.
+이게 제가 선택한 삶이라는 게.
+
+여행이 목적이었던 적은 없어요.
+그저 삶을 선택할 수 있다는 것,
+그 자유가 저를 여기까지 데려왔어요.
+
+📩 이런 삶이 어떻게 가능했는지 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#코즈멜 #카리브해 #크루즈노마드 #세계일주 #퇴사후삶 #노마드라이프 #디지털노마드</pre>
+          <button class="copy-btn" data-target="cap-C">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="1">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">2</span>
+        <span class="order-date">7/17(금)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-manual">직접 업로드</span>
+        </span>
+        <span class="card-title">크루즈 노마드가 느낀 문화충격 5가지 (PART 1)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 노마드가 느낀</span><span class="hook-line hook-em">문화충격 5가지</span><span class="hook-line">PART 1</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 매일 짐 안 싸도 나라가 바뀐다</li><li>② 저녁마다 드레스코드가 있다</li><li>③ 승무원이 내 이름을 외운다</li><li>④ 인터넷이 생각보다 잘 된다</li><li>⑤ 물멍이 일상이 된다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-1">크루즈 노마드로 살면서
+진짜 놀랐던 것들만 모았어요 🛳️
+
+① 매일 짐을 안 싸도
+   아침에 눈 뜨면 나라가 바뀌어 있어요
+
+② 저녁마다 드레스코드가 있어서
+   매일 조금씩 차려입게 돼요
+
+③ 며칠 지나면 승무원이
+   제 이름을 외워서 불러줘요
+
+④ 바다 한가운데인데
+   인터넷이 생각보다 잘 터져요
+
+⑤ 아무것도 안 하고
+   물멍 때리는 게 일상이 됐어요
+
+PART 2에서 더 충격적인 거 가져올게요.
+
+📩 크루즈 노마드 생활이 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #세계일주 #크루즈여행 #문화충격 #디지털노마드 #노마드라이프</pre>
+          <button class="copy-btn" data-target="cap-1">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="크루즈" data-week="1">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">3</span>
+        <span class="order-date">7/18(토)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-manual">직접 업로드</span>
+        </span>
+        <span class="card-title">서울 월세로 크루즈에서 한 달 사는 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">서울 월세로</span><span class="hook-line hook-em">크루즈에서</span><span class="hook-line">한 달 사는 이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>숙박+식사+이동 다 포함</li><li>매일 다른 도시</li><li>생각보다 안 비싸다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-16">많이들 물어봐요.
+"그거 돈 엄청 들지 않아?"
+
+계산해보면 이래요.
+
+크루즈 한 달 = 숙박 + 세끼 + 이동 + 엔터
+이게 다 '포함'이에요.
+
+서울에서 원룸 월세 내고
+밥값, 교통비, 문화생활비 따로 쓰는 거랑
+비교하면… 생각보다 차이 안 나요.
+
+게다가 저는 매일
+다른 나라에서 눈을 떠요.
+
+돈의 문제가 아니라
+'어디에 쓰냐'의 문제였어요.
+
+📩 크루즈 한 달 살기 실비용 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈한달살기 #크루즈노마드 #세계일주 #여행비용 #디지털노마드</pre>
+          <button class="copy-btn" data-target="cap-16">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="용기" data-week="1">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">4</span>
+        <span class="order-date">7/19(일)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-manual">직접 업로드</span>
+        </span>
+        <span class="card-title">하루 2시간만 일하는 크루즈 위 직장인의 하루</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">하루 2시간만 일하는</span><span class="hook-line hook-em">크루즈 위 직장인의</span><span class="hook-line">하루</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>오전 8시 · 발코니에서 커피</li><li>오전 10시 · 노트북 2시간</li><li>오후 1시 · 갑판 산책</li><li>오후 4시 · 물멍</li><li>저녁 8시 · 디너</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-9">누가 그러더라고요.
+그렇게 일해서 먹고 사냐고.
+
+오전 8시
+발코니에서 커피 한 잔으로 시작해요
+
+오전 10시
+노트북 열고 딱 2시간 집중해요
+
+오후 1시
+갑판 걸으며 점심 먹어요
+
+오후 4시
+아무것도 안 하고 바다를 봐요
+
+저녁 8시
+드레스코드 맞춰 디너에 가요
+
+일을 적게 하는 게 아니라
+'집중해서' 하는 법을 배웠어요.
+
+📩 이런 삶이 어떻게 가능한지 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #디지털노마드 #워케이션 #세계일주 #퇴사후삶</pre>
+          <button class="copy-btn" data-target="cap-9">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="1">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">5</span>
+        <span class="order-date">7/20(월)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-manual">직접 업로드</span>
+        </span>
+        <span class="card-title">크루즈 노마드가 느낀 문화충격 5가지 (PART 2)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 노마드가 느낀</span><span class="hook-line hook-em">문화충격 5가지</span><span class="hook-line">PART 2</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>⑥ 시차가 조금씩 바뀐다</li><li>⑦ 룸서비스가 무료다</li><li>⑧ 매일 만나는 사람이 다르다</li><li>⑨ 돈 쓸 일이 의외로 없다</li><li>⑩ 육지가 낯설어진다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-2">문화충격 PART 2예요.
+이건 살아본 사람만 알아요 🛳️
+
+⑥ 배가 이동하면서
+   시차가 하루에 조금씩 바뀌어요
+
+⑦ 룸서비스가 대부분 무료라
+   처음엔 미안할 정도였어요
+
+⑧ 매일 저녁 식탁에서
+   다른 나라 사람을 만나요
+
+⑨ 배 안에선 돈 쓸 일이 없어서
+   생각보다 절약돼요
+
+⑩ 오래 배에 있다 내리면
+   오히려 육지가 낯설어요
+
+📩 크루즈 한 달 살기가 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #세계일주 #크루즈여행 #문화충격 #디지털노마드 #노마드라이프</pre>
+          <button class="copy-btn" data-target="cap-2">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="용기" data-week="2">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">6</span>
+        <span class="order-date">7/21(화)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">"그 돈으로 집을 사" 그 말 뒤로하고 떠났습니다</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">"차라리 그 돈으로 집을 사"</span><span class="hook-line hook-em">그 말 뒤로하고</span><span class="hook-line">떠났습니다</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>평범했어요</li><li>다들 말렸어요</li><li>근데 집이 정답일까?</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-17">평범한 사람이었어요.
+
+월급 받으면 카드값 갚고
+남는 걸로 한 달 버티고
+또 월급을 기다리고.
+
+세계일주를 떠난다고 했을 때
+가장 많이 들은 말이요.
+
+"차라리 그 돈으로 집을 사"
+"나중에 어쩌려고"
+"현실을 봐"
+
+맞아요. 다들 그렇게 말해요.
+집이 정답이라고.
+
+근데 저는 궁금했어요.
+집을 사면 정말 안심이 될까?
+그 다음엔 또 뭘 기다리며 살까?
+
+그래서 그냥 떠났어요.
+
+돌아보니
+'완벽한 준비'를 기다렸다면
+평생 못 떠났을 거예요.
+
+특별한 사람이라 떠난 게 아니에요.
+그냥 한 번 용기 내본 것뿐이에요.
+
+💬 여행하며 사는 삶이 궁금하다면
+댓글에 '용기' 남겨주세요 🙋‍♀️
+.
+.
+.
+#퇴사후삶 #세계일주 #인생리셋 #용기있는선택 #크루즈노마드 #내집마련</pre>
+          <button class="copy-btn" data-target="cap-17">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="2">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">7</span>
+        <span class="order-date">7/23(목)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">19번 항해하고 알게 된 크루즈의 진짜 단점 3가지</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">19번 항해하고 알게 된</span><span class="hook-line hook-em">크루즈의 진짜 단점</span><span class="hook-line">3가지</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 기항지 시간이 짧다</li><li>② 배 안 물가는 비싸다</li><li>③ 멀미는 적응이 필요하다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-3">크루즈 좋은 것만 말하면
+그건 광고죠. 솔직한 단점이에요.
+
+① 기항지에 머무는 시간이
+   생각보다 짧아요 (보통 8시간)
+   → 그래서 동선 계획이 중요해요
+
+② 배 안에서 사 먹는 술·음료는
+   생각보다 비싸요
+   → 패키지 미리 계산하는 게 이득
+
+③ 첫 항해 땐 멀미가 올 수 있어요
+   → 며칠이면 적응되지만 약은 챙기세요
+
+그럼에도 19번을 했다는 건
+장점이 더 크다는 뜻이겠죠 🛳️
+
+📩 크루즈 고르는 법 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈노마드 #세계일주 #크루즈꿀팁 #디지털노마드</pre>
+          <button class="copy-btn" data-target="cap-3">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="용기" data-week="2">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">8</span>
+        <span class="order-date">7/25(토)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">40대에 편도티켓 끊은 사람이 후회 안 하는 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">40대에 편도티켓 끊은 사람이</span><span class="hook-line hook-em">후회 안 하는</span><span class="hook-line">이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>늦었다고 생각했지만</li><li>가장 좋은 때였고</li><li>지금도 안 늦었어요</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-26">40대에 편도 티켓을 끊었어요.
+"그 나이에?" 소리 많이 들었죠.
+
+근데 후회 안 해요. 이유는요.
+
+· 20대의 체력은 없지만
+  40대의 여유가 있어요
+· 젊을 땐 몰랐던
+  '진짜 원하는 것'을 알아요
+· 늦었다고 생각한 그때가
+  사실 가장 빠른 때였어요
+
+나이는 핑계였어요.
+용기가 없었을 뿐이에요.
+
+혹시 지금 '늦었다' 생각한다면
+그때가 가장 빠른 때예요.
+
+📩 시작이 두렵다면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#40대 #퇴사후삶 #세계일주 #인생리셋 #용기있는선택</pre>
+          <button class="copy-btn" data-target="cap-26">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="크루즈" data-week="2">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">9</span>
+        <span class="order-date">7/27(월)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈 한 달 살기 실제 정산 (충격 결과)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 한 달 살기</span><span class="hook-line hook-em">실제 정산</span><span class="hook-line">충격 결과</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>예상보다 적게 나온 것</li><li>예상보다 많이 나온 것</li><li>총합은?</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-20">크루즈 한 달, 실제로 얼마 썼을까?
+솔직하게 정산해볼게요.
+
+【예상보다 적었던 것】
+· 식비 (거의 다 포함이라 0에 가까움)
+· 숙박 (당연히 포함)
+· 도시 간 이동 (자동)
+
+【예상보다 많았던 것】
+· 음료·주류 (패키지 안 하면 훅 나감)
+· 기항지 액티비티
+· 와이파이
+
+총합은… 생각보다 합리적이었어요.
+핵심은 '포함된 걸 최대한 쓰는 것'이에요.
+
+📩 상세 정산표 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈한달살기 #여행비용 #크루즈꿀팁 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-20">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="크루즈" data-week="3">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">10</span>
+        <span class="order-date">7/29(수)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈 노마드의 아침 6시 ~ 밤 12시 (풀버전)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 노마드의</span><span class="hook-line hook-em">아침 6시 ~ 밤 12시</span><span class="hook-line">풀버전</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>6AM 일출</li><li>9AM 조식 뷔페</li><li>12PM 기항지 하선</li><li>6PM 승선</li><li>12AM 야경</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-10">크루즈에서의 하루,
+통째로 보여드릴게요 🛳️
+
+6AM · 발코니에서 일출을 봐요
+9AM · 조식 뷔페 (여기가 천국)
+12PM · 기항지에 내려서 반나절 여행
+6PM · 배로 돌아와 샤워
+8PM · 디너 &amp; 공연
+12AM · 갑판에서 야경 보며 마무리
+
+매일 이렇게 흘러가요.
+반복 같아 보여도
+매일 다른 도시, 다른 바다예요.
+
+📩 크루즈 하루가 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #크루즈여행 #브이로그 #세계일주 #디지털노마드</pre>
+          <button class="copy-btn" data-target="cap-10">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="용기" data-week="3">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">11</span>
+        <span class="order-date">7/31(금)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">40대에 세계일주하며 버린 것 3가지</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">40대에 세계일주하며</span><span class="hook-line hook-em">버린 것</span><span class="hook-line">3가지</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 남들의 시선</li><li>② 언젠가는 이라는 말</li><li>③ 안정이라는 착각</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-7">얻은 것보다
+버린 걸 말하고 싶었어요.
+
+① 남들의 시선
+   "그 나이에?" 라는 말을
+   더 이상 신경 안 쓰게 됐어요
+
+② "언젠가는" 이라는 말
+   언젠가는 오지 않더라고요
+   그냥 지금 했어요
+
+③ 안정이라는 착각
+   가장 안정적이라 믿었던 게
+   사실 가장 불안했어요
+
+버리고 나니
+비로소 제 삶이 보였어요.
+
+📩 다른 삶을 고민 중이라면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#퇴사후삶 #40대 #세계일주 #인생리셋 #용기있는선택 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-7">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="크루즈" data-week="3">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">12</span>
+        <span class="order-date">8/2(일)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈가 호텔보다 싸다는 게 진짜일까</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈가</span><span class="hook-line hook-em">호텔보다 싸다는 게</span><span class="hook-line">진짜일까</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>호텔: 방값만</li><li>크루즈: 방+식사+이동+쇼</li><li>1박 단가 비교하면?</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-18">"크루즈 = 비싼 여행"
+이 편견부터 깨볼게요.
+
+【호텔 여행】
+방값 + 매 끼 식사 + 도시 간 이동 + 액티비티
+
+【크루즈】
+이 모든 게 '1박 요금'에 포함
+
+물론 크루즈도 등급 따라 다르지만
+1박 단가로 쪼개서 계산하면
+생각보다 합리적이에요.
+
+특히 여러 도시를 도는 여행이라면
+이동·숙박이 자동 해결돼서
+오히려 이득일 때가 많아요.
+
+📩 크루즈 vs 호텔 실계산 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #여행비용 #크루즈꿀팁 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-18">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="크루즈" data-week="3">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">13</span>
+        <span class="order-date">8/4(화)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">기항지 8시간, 이렇게 씁니다 (시간대별)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">기항지 8시간</span><span class="hook-line hook-em">이렇게 씁니다</span><span class="hook-line">시간대별</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>9AM 하선</li><li>10AM 핵심 명소</li><li>12PM 현지 맛집</li><li>3PM 해변</li><li>5PM 승선 마감 전 복귀</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-11">기항지는 딱 8시간.
+이 시간을 어떻게 쓰냐가 핵심이에요.
+
+9AM · 배에서 내리자마자 이동
+10AM · 가장 보고 싶은 곳 먼저 (사람 적음)
+12PM · 현지 맛집에서 점심
+3PM · 해변이나 뷰포인트에서 여유
+5PM · 승선 마감 1시간 전 복귀 (필수!)
+
+욕심내면 다 놓쳐요.
+'하나만 제대로'가 제 원칙이에요.
+
+📩 기항지별 추천 동선 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #기항지 #여행팁 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-11">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="용기" data-week="4">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">14</span>
+        <span class="order-date">8/6(목)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">세계일주 중인데 안 부러워도 되는 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">세계일주 중인데</span><span class="hook-line hook-em">안 부러워도 되는</span><span class="hook-line">이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>화려해 보이지만</li><li>외로울 때도 있고</li><li>결국 선택의 문제</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-24">세계일주 한다고 하면
+다들 부러워해요.
+
+근데 솔직히 말할게요.
+
+· 화려한 순간만큼
+  혼자인 순간도 많아요
+· 낯선 곳의 외로움도 있어요
+· 매일이 천국은 아니에요
+
+그럼에도 제가 이걸 택한 건
+'덜 후회할 삶'이라서예요.
+
+부러워할 필요 없어요.
+당신도 당신의 삶에서
+선택할 수 있으니까요.
+
+📩 당신의 선택을 응원해요.
+궁금하면 DM에 '용기' 남겨주세요.
+.
+.
+.
+#세계일주 #퇴사후삶 #노마드라이프 #인생리셋 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-24">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="4">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">15</span>
+        <span class="order-date">8/8(토)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈에서 절대 하면 안 되는 행동 4가지</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈에서</span><span class="hook-line hook-em">절대 하면 안 되는</span><span class="hook-line">행동 4가지</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 기항지에서 늦게 돌아오기</li><li>② 드레스코드 무시하기</li><li>③ 팁 안 챙기기</li><li>④ 마지막 날 밤 짐 안 싸기</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-4">19번 하면서 제가 실수했던 것들이에요.
+여러분은 하지 마세요 🙏
+
+① 기항지에서 늦으면
+   배는 정말 그냥 떠나요
+   (기다려주지 않아요)
+
+② 드레스코드 있는 날 무시하면
+   레스토랑 입장이 안 될 수 있어요
+
+③ 팁 문화가 있는 크루즈는
+   미리 예산에 넣어두세요
+
+④ 마지막 날 밤 짐을 안 싸두면
+   새벽 하선 때 정신없어요
+
+📩 크루즈 처음이라면
+DM에 '크루즈' 남겨주세요. 체크리스트 드릴게요.
+.
+.
+.
+#크루즈여행 #크루즈꿀팁 #세계일주 #크루즈노마드 #여행팁</pre>
+          <button class="copy-btn" data-target="cap-4">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="용기" data-week="4">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">16</span>
+        <span class="order-date">8/10(월)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">효도관광인 줄 알았던 크루즈, 진짜 반전</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">효도관광인 줄 알았던</span><span class="hook-line hook-em">크루즈</span><span class="hook-line">진짜 반전</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>부모님 여행인 줄</li><li>직접 타보니</li><li>MZ가 더 많다?</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-19">저도 그렇게 생각했어요.
+크루즈 = 부모님 세대 여행.
+
+근데 직접 타보니 완전 반전이었어요.
+
+· 젊은 커플, 혼자 온 사람도 많고
+· 어른들만 타는 프리미엄 크루즈는
+  파티 분위기예요
+· 워케이션 하는 노마드도 늘고 있어요
+
+'효도관광'이라는 이미지는
+옛날 얘기였어요.
+
+편견 하나 깨는 데
+19번의 항해가 걸렸네요 😅
+
+📩 요즘 크루즈 트렌드 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈노마드 #세계일주 #여행트렌드 #반전</pre>
+          <button class="copy-btn" data-target="cap-19">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="용기" data-week="4">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">17</span>
+        <span class="order-date">8/12(수)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">바다 위에서 일하는 평일 하루 (오전편)</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">바다 위에서 일하는</span><span class="hook-line hook-em">평일 하루</span><span class="hook-line">오전편</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>7AM 기상</li><li>8AM 발코니 오피스</li><li>10AM 화상미팅</li><li>12PM 점심</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-12">평일에도 일은 해요.
+장소가 바다 위일 뿐이에요 💻
+
+7AM · 알람 없이 파도 소리에 깨요
+8AM · 발코니에 노트북 세팅
+       (오늘의 오피스는 바다뷰)
+10AM · 화상미팅
+        배경이 바다라 다들 놀라요
+12PM · 갑판에서 점심
+
+일하는 삶을 버린 게 아니라
+일하는 '장소'를 바꿨을 뿐이에요.
+
+📩 바다 위에서 일하는 법 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#워케이션 #디지털노마드 #크루즈노마드 #세계일주 #원격근무</pre>
+          <button class="copy-btn" data-target="cap-12">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="용기" data-week="5">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">18</span>
+        <span class="order-date">8/14(금)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">세계일주하면서 일이 안 끊기는 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">세계일주하면서</span><span class="hook-line hook-em">일이 안 끊기는</span><span class="hook-line">이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>장소에 안 매인 일</li><li>온라인 시스템</li><li>시차를 활용</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-29">"여행하면 일은 어떻게 해?"
+가장 많이 받는 질문이에요.
+
+답은 '장소에 안 매인 일'이에요.
+
+· 노트북 하나로 되는 일을 해요
+· 모든 시스템을 온라인으로 옮겼어요
+· 시차를 오히려 활용해요
+  (내가 잘 때 다른 곳은 일과 시간)
+
+일을 그만둔 게 아니라
+'어디서든 할 수 있게' 바꿨어요.
+
+이게 되니까
+세계일주가 여행이 아니라
+'삶'이 됐어요.
+
+📩 어디서든 일하는 법이 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#디지털노마드 #워케이션 #크루즈노마드 #세계일주 #원격근무</pre>
+          <button class="copy-btn" data-target="cap-29">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="5">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">19</span>
+        <span class="order-date">8/16(일)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈 초보가 100% 후회하는 실수 5가지</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 초보가</span><span class="hook-line hook-em">100% 후회하는</span><span class="hook-line">실수 5가지</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 발코니 없는 방 예약</li><li>② 음료 패키지 안 함</li><li>③ 기항지 투어 안 알아봄</li><li>④ 짐 너무 많이</li><li>⑤ 첫날 무리</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-5">초보 때 저도 다 해본 실수예요 😅
+
+① 발코니 없는 방 예약
+   → 바다뷰 아침의 가치는 돈 값 해요
+
+② 음료 패키지 안 하고 탐
+   → 낱개로 사면 훨씬 비싸요
+
+③ 기항지 투어를 안 알아봄
+   → 내려서 우왕좌왕하다 시간 다 감
+
+④ 짐을 너무 많이 챙김
+   → 선실 좁아요. 미니멀이 답
+
+⑤ 첫날부터 무리
+   → 며칠 되는데 페이스 조절하세요
+
+📩 크루즈 준비 체크리스트 필요하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈초보 #크루즈꿀팁 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-5">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="크루즈" data-week="5">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">20</span>
+        <span class="order-date">8/18(화)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">비싸 보이는 크루즈, 진짜 돈 나가는 건 따로 있어요</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">비싸 보이는 크루즈</span><span class="hook-line hook-em">진짜 돈 나가는 건</span><span class="hook-line">따로 있어요</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>함정 ① 음료 패키지</li><li>함정 ② 기항지 투어</li><li>함정 ③ 스파·사진</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-22">크루즈 요금 자체보다
+'추가 지출'이 진짜예요.
+
+【숨은 지출 함정】
+① 음료 패키지
+   → 안 사면 낱개로 계속 나가요
+
+② 기항지 투어
+   → 배에서 사면 2배, 자유여행하면 반값
+
+③ 스파·전문 사진
+   → 분위기에 휩쓸려 사게 돼요
+
+크루즈 요금은 '입장료'고
+진짜 예산 관리는 이 셋이에요.
+
+여기만 잡으면
+크루즈, 생각보다 안 비싸요.
+
+📩 크루즈 예산 관리법 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈꿀팁 #여행비용 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-22">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="크루즈" data-week="5">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">21</span>
+        <span class="order-date">8/20(목)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈에서 가장 바쁜 시간 vs 가장 한가한 시간</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈에서</span><span class="hook-line hook-em">가장 바쁜 시간 vs</span><span class="hook-line">가장 한가한 시간</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>바쁨: 조식 8-9시</li><li>바쁨: 하선 직후</li><li>한가: 오후 2-4시</li><li>한가: 기항일 배 안</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-13">크루즈 고수는 '시간'을 알아요 ⏰
+
+【가장 붐비는 시간】
+· 조식 8~9시 (뷔페 전쟁)
+· 기항지 하선 직후 (엘리베이터 만원)
+
+【가장 한가한 시간】
+· 오후 2~4시 (다들 기항지에)
+· 기항일에 배에 남으면 수영장 전세
+
+붐빌 때 피하고
+한가할 때 즐기면
+같은 크루즈도 훨씬 여유로워요.
+
+📩 크루즈 200% 즐기는 법 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈꿀팁 #세계일주 #크루즈노마드 #여행팁</pre>
+          <button class="copy-btn" data-target="cap-13">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="용기" data-week="6">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">22</span>
+        <span class="order-date">8/22(토)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">남들이 미쳤다던 결정, 1년 뒤 결과</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">남들이 미쳤다던 결정</span><span class="hook-line hook-em">1년 뒤</span><span class="hook-line">결과</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 직장을 그만뒀다</li><li>② 짐을 다 정리했다</li><li>③ 편도 티켓을 끊었다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-21">안정을 내려놓을 때마다
+다들 미쳤다고 했어요.
+
+① 안정된 자리를 내려놨고
+② 익숙한 살림을 정리했고
+③ 돌아올 날짜 없는 길을 택했어요
+
+그때마다 불안했어요.
+근데 지나고 보니
+그 결정들이 지금의 저를 만들었어요.
+
+미친 결정이 아니라
+가장 나다운 결정이었어요.
+
+한 번도 안 흔들린 게 아니라
+흔들려도 계속 나답게
+선택해온 것뿐이에요.
+
+💬 큰 결정을 앞두고 있다면
+댓글에 '용기' 남겨주세요 🙋‍♀️
+.
+.
+.
+#퇴사후삶 #인생리셋 #세계일주 #용기있는선택 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-21">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="6">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">23</span>
+        <span class="order-date">8/24(월)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈 타기 전 아무도 안 알려준 5가지</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 타기 전</span><span class="hook-line hook-em">아무도 안 알려준</span><span class="hook-line">5가지</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 승선 첫날 점심은 뷔페</li><li>② 방보다 공용공간이 넓다</li><li>③ 세탁 서비스가 있다</li><li>④ 와이파이는 패키지로</li><li>⑤ 선상 신문이 매일 온다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-6">검색해도 잘 안 나오는
+현실 정보만 모았어요 📋
+
+① 승선 첫날 방 준비 전엔
+   뷔페에서 점심 먹으며 기다려요
+
+② 선실은 좁아도
+   공용공간이 넓어서 답답하지 않아요
+
+③ 유료지만 세탁 서비스가 있어서
+   짐을 줄일 수 있어요
+
+④ 와이파이는 패키지로 사야
+   훨씬 저렴해요
+
+⑤ 매일 선상 신문(일정표)이 와요
+   → 이거 안 보면 이벤트 다 놓쳐요
+
+📩 더 궁금한 거 있으면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈꿀팁 #크루즈정보 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-6">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="용기" data-week="6">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">24</span>
+        <span class="order-date">8/26(수)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈 노마드가 생각보다 안 화려한 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈 노마드가</span><span class="hook-line hook-em">생각보다</span><span class="hook-line">안 화려한 이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>SNS는 하이라이트</li><li>실제는 소박한 반복</li><li>그게 좋은 이유</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-25">SNS만 보면 화려해 보이죠.
+근데 실제 제 삶은 소박해요.
+
+· 아침에 일어나 일하고
+· 낮엔 도시를 걷고
+· 밤엔 책을 읽어요
+
+SNS는 '하이라이트'만 올리니까
+화려해 보일 뿐이에요.
+
+근데 저는
+이 소박한 반복이 좋아요.
+
+특별한 곳에서
+평범하게 사는 것.
+그게 제가 원했던 삶이에요.
+
+📩 진짜 노마드 삶이 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #세계일주 #노마드라이프 #여행일상 #퇴사후삶</pre>
+          <button class="copy-btn" data-target="cap-25">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="용기" data-week="6">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">25</span>
+        <span class="order-date">8/28(금)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">세계일주 중인데 오늘 하루 뭐 했냐면요</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">세계일주 중인데</span><span class="hook-line hook-em">오늘 하루</span><span class="hook-line">뭐 했냐면요</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>아침 · 새 도시 도착</li><li>낮 · 골목 산책</li><li>저녁 · 현지 음식</li><li>밤 · 다음 항구로</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-14">화려할 것 같죠?
+사실 소박해요.
+
+아침 · 눈 뜨니 새로운 도시에 도착
+낮 · 목적지 없이 골목을 걸었어요
+저녁 · 이름도 모르는 현지 음식
+밤 · 배가 다음 항구로 떠나요
+
+특별한 걸 한 게 아니라
+그냥 '오늘'을 살았어요.
+
+근데 그 평범한 하루가
+낯선 도시에서라
+특별해지더라고요.
+
+📩 이런 일상이 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#세계일주 #크루즈노마드 #여행일상 #퇴사후삶 #노마드라이프</pre>
+          <button class="copy-btn" data-target="cap-14">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="C" data-kw="용기" data-week="7">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">26</span>
+        <span class="order-date">8/30(일)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-C">돈·반전</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">사표 낸 통장 잔고로 여기까지 왔습니다</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">사표 낸 통장 잔고로</span><span class="hook-line hook-em">여기까지</span><span class="hook-line">왔습니다</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>퇴사할 때 잔고</li><li>가장 무서웠던 것</li><li>지금 깨달은 것</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-23">안정된 자리를 내려놓던 날,
+통장을 봤어요.
+숫자는 정해져 있는데
+앞날은 정해진 게 없었어요.
+
+가장 무서웠던 건
+돈이 떨어지는 게 아니라
+'다시 돌아갈 곳이 없다'는 거였어요.
+
+근데 살아보니 알겠더라고요.
+
+돈은 다시 벌 수 있고
+용기는 그 순간이 아니면
+못 낸다는 걸.
+
+통장 잔고가 아니라
+그때의 결심이
+저를 여기까지 데려왔어요.
+
+💬 그 첫 발이 두렵다면
+댓글에 '용기' 남겨주세요 🙋‍♀️
+.
+.
+.
+#퇴사후삶 #인생리셋 #세계일주 #용기있는선택 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-23">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="A" data-kw="크루즈" data-week="7">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">27</span>
+        <span class="order-date">9/1(화)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-A">리스트</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈에서 돈 굳는 꿀팁 5가지</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈에서</span><span class="hook-line hook-em">돈 굳는 꿀팁</span><span class="hook-line">5가지</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>① 음료 패키지 미리 계산</li><li>② 기항지는 자유여행</li><li>③ 와이파이 최소 패키지</li><li>④ 스파는 첫날 할인</li><li>⑤ 면세는 마지막 날</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-8">크루즈 비용, 아는 만큼 아껴요 💰
+
+① 음료 패키지는 본인 소비량 계산 후
+   → 안 마시면 낱개가 오히려 이득
+
+② 기항지 투어는 배에서 사면 비싸요
+   → 자유여행이 반값
+
+③ 와이파이는 최소 패키지로
+   → 기항지 와이파이 쓰면 충분
+
+④ 스파는 승선 첫날 할인 많아요
+
+⑤ 면세 쇼핑은 마지막 날
+   → 프로모션이 몰려요
+
+📩 크루즈 예산 짜는 법 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈꿀팁 #여행절약 #세계일주 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-8">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="용기" data-week="7">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">28</span>
+        <span class="order-date">9/3(목)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">매일 바다 보는데도 안 질리는 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">매일 바다 보는데도</span><span class="hook-line hook-em">안 질리는</span><span class="hook-line">이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>같은 바다는 없다</li><li>빛에 따라 다르고</li><li>마음에 따라 다르다</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-27">매일 바다를 봐요.
+안 질리냐구요?
+
+신기하게 안 질려요.
+
+· 아침 바다와 저녁 바다는 달라요
+· 맑은 날과 흐린 날이 달라요
+· 그리고 무엇보다
+  '제 마음'에 따라 달라 보여요
+
+같은 바다인데
+매일 다른 바다예요.
+
+삶도 그렇더라고요.
+반복 같아 보여도
+마음이 바뀌면 풍경이 바뀌어요.
+
+📩 이런 삶의 여유가 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #세계일주 #바다 #여행일상 #노마드라이프</pre>
+          <button class="copy-btn" data-target="cap-27">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="크루즈" data-week="7">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">29</span>
+        <span class="order-date">9/5(토)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈에서 오히려 살이 빠지는 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈에서</span><span class="hook-line hook-em">오히려 살이 빠지는</span><span class="hook-line">이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>많이 걷는다</li><li>계단 이용</li><li>수영·액티비티</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-cruise">DM '크루즈'</span></div>
+          <pre class="caption" id="cap-28">"크루즈 = 먹기만 해서 살찐다"
+저도 그런 줄 알았어요.
+
+근데 오히려 빠질 수도 있어요. 왜?
+
+· 배가 워낙 커서
+  하루 만보는 기본이에요
+· 엘리베이터 대신 계단 쓰면
+  운동량이 엄청나요
+· 수영장, 헬스장, 액티비티가
+  다 무료라 자연스럽게 움직여요
+
+물론 뷔페 조절은 필요하지만 😅
+생각보다 활동량이 많은 여행이에요.
+
+📩 크루즈 생활이 궁금하면
+DM에 '크루즈' 남겨주세요.
+.
+.
+.
+#크루즈여행 #크루즈노마드 #세계일주 #여행일상 #크루즈꿀팁</pre>
+          <button class="copy-btn" data-target="cap-28">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="B" data-kw="용기" data-week="8">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">30</span>
+        <span class="order-date">9/7(월)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-B">하루</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">크루즈 마지막 날 아침 루틴</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">크루즈</span><span class="hook-line hook-em">마지막 날</span><span class="hook-line">아침 루틴</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>6AM 마지막 일출</li><li>7AM 짐 정리</li><li>8AM 마지막 조식</li><li>9AM 하선</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-15">한 항해가 끝나는 날은
+늘 조금 아쉬워요.
+
+6AM · 마지막 일출을 눈에 담아요
+7AM · 짐을 정리해요
+       (여행이 끝난다는 실감)
+8AM · 마지막 조식
+       늘 앉던 자리에서
+9AM · 하선
+
+끝이 아니라
+다음 항해를 준비하는 쉼표예요.
+
+19번을 했는데도
+매번 이 아침이 특별해요.
+
+📩 크루즈 세계일주가 궁금하면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#크루즈노마드 #세계일주 #여행일상 #크루즈여행 #퇴사후삶</pre>
+          <button class="copy-btn" data-target="cap-15">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-fmt="D" data-kw="용기" data-week="8">
+    <button class="card-head" aria-expanded="false">
+      <span class="card-order">
+        <span class="order-slot">31</span>
+        <span class="order-date">9/9(수)</span>
+      </span>
+      <span class="card-title-wrap">
+        <span class="card-tags">
+          <span class="card-fmt fmt-D">이유</span>
+          <span class="upload-mode mode-auto">8PM 예약</span>
+        </span>
+        <span class="card-title">안정된 직장 버린 사람이 더 안정적인 이유</span>
+      </span>
+      <span class="card-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="card-body">
+      <div class="card-body-inner">
+        <div class="block">
+          <div class="block-label">🎬 커버 자막 (첫 3초)</div>
+          <div class="hook-box"><span class="hook-line">안정된 직장 버린 사람이</span><span class="hook-line hook-em">더 안정적인</span><span class="hook-line">이유</span></div>
+        </div>
+        <div class="block">
+          <div class="block-label">📝 온스크린 자막 (슬라이드/컷)</div>
+          <ul class="subs"><li>안정의 정의가 바뀜</li><li>한 곳에 안 매임</li><li>스스로 만드는 안정</li></ul>
+        </div>
+        <div class="block">
+          <div class="block-label">💬 캡션 <span class="kw-tag kw-courage">DM '용기'</span></div>
+          <pre class="caption" id="cap-30">역설적이지만 사실이에요.
+
+안정된 직장을 버렸는데
+지금이 더 안정적이에요.
+
+왜냐면 '안정'의 정의가 바뀌었거든요.
+
+· 예전엔 안정 = 한 직장, 한 월급
+  → 그게 흔들리면 다 무너져요
+· 지금은 안정 = 어디서든 살 수 있는 나
+  → 한 곳이 흔들려도 괜찮아요
+
+진짜 안정은
+'변하지 않는 것'이 아니라
+'어떤 변화도 견디는 나'였어요.
+
+그걸 세계일주가 가르쳐줬어요.
+
+📩 진짜 안정을 찾고 있다면
+DM에 '용기' 남겨주세요.
+.
+.
+.
+#퇴사후삶 #인생리셋 #세계일주 #용기있는선택 #크루즈노마드</pre>
+          <button class="copy-btn" data-target="cap-30">캡션 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </article>
+  </main>
+
+  <footer class="footer">
+    <div class="fname">BELLA · CRUISE NOMAD</div>
+    <p style="margin-top:8px;">두바이 흥행 포맷 벤치마킹 · 전부 새 제목</p>
+  </footer>
+</div>
+
+<script>
+// 아코디언
+document.querySelectorAll('.card-head').forEach(function(head){
+  head.addEventListener('click', function(){
+    var card = head.closest('.card');
+    var open = card.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+
+// 필터
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function(card){
+      var show = f==='all'
+        || card.getAttribute('data-fmt')===f
+        || card.getAttribute('data-kw')===f
+        || (f==='week1' && card.getAttribute('data-week')==='1');
+      card.classList.toggle('hidden', !show);
+    });
+  });
+});
+
+// 복사
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var el = document.getElementById(btn.getAttribute('data-target'));
+    var text = el.innerText;
+    var done = function(){
+      var orig = btn.textContent;
+      btn.textContent = '✓ 복사됐어요!';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = orig; btn.classList.remove('done'); }, 1600);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text, done); });
+    } else { fallback(text, done); }
+  });
+});
+function fallback(text, cb){
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ document.execCommand('copy'); cb(); }catch(e){}
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
